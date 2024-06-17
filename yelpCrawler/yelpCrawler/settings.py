@@ -1,3 +1,5 @@
+import os
+
 # Scrapy settings for yelpCrawler project
 #
 # For simplicity, this file contains only settings considered important or
@@ -66,8 +68,7 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 # ITEM_PIPELINES = {
-#    # "yelpCrawler.pipelines.YelpcrawlerPipeline": 300,
-#    'yelpCrawler.pipelines.DuplicatesPipeline': 200
+#    "yelpCrawler.pipelines.YelpcrawlerPipeline": 300,
 # }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -97,12 +98,12 @@ TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
 
 FEEDS = {
-    "s3://yelp/raw/%(name)s.csv": {
-        'format': 'csv',
-        'encoding': 'utf8'
-      }
+   "s3://yelp/raw/%(name)s_data.csv": {
+      'format': 'csv',
+      'encoding': 'utf8'
+   }
 }
 
-AWS_ACCESS_KEY_ID="cZhIedkHqtv5aDQx9JsH"
-AWS_SECRET_ACCESS_KEY="5QMLvSpS8XhZWCorytluEugZfNt3ZDPu8wAHGFFd"
-AWS_ENDPOINT_URL="https://minio.labserver.com.br:443"
+AWS_ACCESS_KEY_ID=os.environ['ACCESS_KEY']
+AWS_SECRET_ACCESS_KEY=os.environ['SECRET_ACCESS']
+AWS_ENDPOINT_URL=os.environ['ENDPOINT_MINIO'] 
